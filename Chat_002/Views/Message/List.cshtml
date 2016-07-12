@@ -1,0 +1,35 @@
+﻿@model Chat_002.Models.MessageListViewModel
+
+@{
+    ViewBag.Title = "Message";
+}
+
+@if (HttpContext.Current.User.IsInRole("User") && ViewBag.category == true)
+{
+    
+        using (Html.BeginForm("CreateMessage", "Message", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Новое сообщение</legend>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Message.MessageContext)
+                    @Html.ValidationMessageFor(model => model.Message.MessageContext)
+                </div>
+                <div class="editor-field">
+                    @Html.HiddenFor(model => model.Topic.TopicName)
+                    @Html.HiddenFor(model => model.Message.User.UserName)
+                </div>
+                <p>
+                    <input type="submit" value="Оставить сообщение" />
+                </p>
+            </fieldset>
+        }
+}
+@ViewBag.user
+@foreach (var p in Model.Messages)
+{
+    <div>@{Html.RenderPartial("MessageSummary", p);}</div>
+    
+}
+

@@ -1,0 +1,23 @@
+﻿@model Chat_002.Models.Message
+<div class="item">
+    @if (Model.User.ImageDate != null)
+    {
+        <div style="float: left; margin-right: 20px">
+            <img width="75" height="75" src="@Url.Action("GetImage", "Message", new { Model.User.UserId })" />
+        </div>
+    }
+    @*<strong>@Model.Time @Model.User.UserName</strong>
+    @Model.MessageContext*@
+
+
+
+
+    @*<h3>@Model.Time</h3>
+    @Model.User.UserName*@
+    <strong>@Model.Time @Model.User.UserName</strong>
+    <div class="item">
+        <h1> @Model.MessageContext</h1>
+    </div>
+
+</div>
+<br/>

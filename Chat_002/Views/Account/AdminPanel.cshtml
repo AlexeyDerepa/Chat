@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Chat_002.Models.User>
+@{
+    int count = 0;
+    int UserId = 0;
+}
+<h1>Admin panel</h1>
+
+<table>
+
+    @foreach (Chat_002.Models.User user in Model)
+    {
+        count++;
+        UserId = user.UserId;
+        <tr>
+           
+
+
+            @using (Html.BeginForm("AdminPanel", "Account", FormMethod.Post))
+            {
+            <td>@count</td>
+            <td>
+                <strong>
+                    @Html.Label(user.UserName)
+                </strong>
+            </td>
+            <td>
+                <select name="role">
+                    <option @(user.RoleId == 3 ? "selected" : "")>User</option>
+                    <option @(user.RoleId == 2 ? "selected" : "")>Moderator</option>
+                    <option @(user.RoleId == 1 ? "selected" : "")>Admin</option>
+                </select>
+            </td>
+
+            <td>
+                @Html.HiddenFor(model => UserId)
+            </td>
+<td><input type="submit"/></td>
+            }
+        </tr>
+
+    }
+
+</table>

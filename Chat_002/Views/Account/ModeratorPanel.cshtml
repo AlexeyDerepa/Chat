@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Chat_002.Models.Topic>
+
+@{
+    int count = 0;
+    int TopicId = 0;
+}
+<h1>Admin panel</h1>
+<table>
+
+    @foreach (Chat_002.Models.Topic topic in Model)
+    {
+        count++;
+        TopicId = topic.TopicId;
+        <tr>
+            @using (Html.BeginForm("ModeratorPanelDeleteTopic", "Account", FormMethod.Post))
+            {
+                <td>@count</td>
+                <td>
+                    <strong>
+                        @Html.Label(topic.TopicName)
+                    </strong>
+                </td>
+                <td>
+                    @Html.HiddenFor(model => TopicId)
+                </td>
+                <td>
+            @*@Html.ActionLink("Delete topic", "ModeratorPanelDeleteTopic", "Account", new { id = TopicId })*@
+            <input type="submit" value="delete topic"/></td>
+            }
+        </tr>
+    }
+
+</table>
+

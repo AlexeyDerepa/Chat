@@ -1,0 +1,82 @@
+﻿@model IEnumerable<string>
+
+@if (HttpContext.Current.User.IsInRole("User")
+            || HttpContext.Current.User.IsInRole("Admin")
+            || HttpContext.Current.User.IsInRole("Moderator"))
+{
+    @Html.ActionLink("Sign Out", "LogOff", "Account")
+}
+else
+{
+    @Html.ActionLink("Sign In", "Login", "Account")
+}
+
+
+@if ( HttpContext.Current.User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Admin panel", "AdminPanel", "Account")
+}
+
+@if (HttpContext.Current.User.IsInRole("Moderator"))
+{
+    @Html.ActionLink("Moderator panel", "ModeratorPanel", "Account")
+}
+
+
+
+
+
+
+@*@if (HttpContext.Current.User.IsInRole("User")
+                || HttpContext.Current.User.IsInRole("Admin")
+                || HttpContext.Current.User.IsInRole("Moderator"))
+    {
+        @Html.ActionLink("Admin panel", "LogOff", "Account")
+    }*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Html.ActionLink("Home", "List", "Message")
+
+
+@if (HttpContext.Current.User.IsInRole("User"))
+{
+    @Html.ActionLink("Create new topic", "CreateTopic", "Message")
+}
+
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, new
+    {
+        controller = "Message",
+        action = "List",
+        category = link,
+        page = 1
+    },
+    new
+    {
+        @class = link == ViewBag.SelectedCategory ? "selected" : null
+    })
+
+}
+
